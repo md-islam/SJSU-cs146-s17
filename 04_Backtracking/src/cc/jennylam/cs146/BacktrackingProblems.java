@@ -29,7 +29,19 @@ public class BacktrackingProblems {
      * @return true if such a subset exists
      */
     public static boolean oddSubsetSum(List<Integer> list, int target) {
-        return false;
+
+        if(list.isEmpty()){
+            return target == 0;
+        }
+        List<Integer> restOfTheList = list.subList(1, list.size());
+        if(list.get(0) % 2 == 0){
+            boolean canMakeWithoutFirstElement = oddSubsetSum(restOfTheList, target);
+            return canMakeWithoutFirstElement;
+        }
+        boolean canMakeSubsetUsingFirstElement = oddSubsetSum(restOfTheList, target - list.get(0));
+        boolean canMakeSubsetWithoutFirstElement = oddSubsetSum(restOfTheList, target);
+        return canMakeSubsetUsingFirstElement || canMakeSubsetWithoutFirstElement;
+
     }
 
     /**
@@ -43,6 +55,7 @@ public class BacktrackingProblems {
      * @return true if such a subset exists
      */
     public static boolean subsetOf8Sum(List<Integer> list, int target) {
+
         return false;
     }
 
@@ -90,11 +103,16 @@ public class BacktrackingProblems {
 
     public static void main(String[] args) {
         // odd subset sum
-        List<Integer> list1 = new ArrayList<>(Arrays.asList(5, 13, 9, 8, 2));
+        List<Integer> list1 = new ArrayList<>(Arrays.asList(5, 13, 9, 8, 2, 4, 1, 10, 3, 6));
         System.out.println(list1 + ", 8: oddSubsetSum " + oddSubsetSum(list1, 8));
         System.out.println(list1 + ", 13: oddSubsetSum " + oddSubsetSum(list1, 13));
         System.out.println(list1 + ", 14: oddSubsetSum " + oddSubsetSum(list1, 14));
         System.out.println(list1 + ", 15: oddSubsetSum " + oddSubsetSum(list1, 15));
+
+
+//        System.out.println(list1 + ", );
+        System.out.println();
+        System.out.println();
         // write more test code here
     }
 
